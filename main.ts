@@ -8,29 +8,33 @@ import { UserService } from './lib/User';
 let users = [];
 let dhadiObj: any = {};
 let colors = ["user user1", "user user2"]
+type UserInfo = {
+    username: string;
+}
+const payload = <any>{};
 io.on('connection', (socket) => {
     console.log(socket.id);
-    
-        users.push(new User(socket.id, colors[users.length], false));
+    let dObj = new DhadiIndices();
+    let userSer = new UserService();
+/*     
+       // users.push(new User(socket.id, colors[users.length], false));
         if(users.length > 2){
            users.shift();
-        }
-    
-    console.log(users.length)
-    if(users.length == 2){
-        let dObj = new DhadiIndices();
-        let userSer = new UserService();
+        } */
+    socket.on('load', (msg) =>{
+        console.log('load', msg)
+    })
+    socket.on('login', (loginInfo: UserInfo) =>{
+        if(users.length < 2)
+            users.push(new User(loginInfo.username, colors[users.length], false));
+        console.log('login', loginInfo)
         users[0].isActive = true;
-        userSer.users = <User[]>users;
-        dhadiObj.currentUser = dObj.currentUser;
-        io.emit('message', { dhadiObj, users: users })
-        socket.on('message', (msg) =>{
-            console.log(socket.id, msg);
-           
-        })
-        socket.on('clickedOnDye', (data) =>{
-            console.log(socket.id)
-            //searching for the current user
+        payload.users = users;
+        payload.currentUser = dObj.currentUser;
+        socket.emit('message', {payload})
+    })
+    socket.on('clickedOnDye', (data) => {
+            if(!this.userSer) this.userSer = { users:[]}
             let user = this.userSer.users.filter(user => user.name == socket.id)[0];
             user.position = data.payload.currentDye;
             if(user){
@@ -38,13 +42,8 @@ io.on('connection', (socket) => {
                 userSer.swapUser();
             }
            socket.emit('message', users);
-            //console.log(userSer);
-
         })
-    }else{      
-        socket.emit('message', "Waiting for the match");
-    }
-   
+    
 });
 server.listen(3001, ()=>{
     console.log("Server has started at 3001")
