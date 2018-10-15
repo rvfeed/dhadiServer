@@ -1,4 +1,6 @@
 import * as express from 'express';
+import { DhadiIndices } from './lib/dhadi';
+import {bodyParser} from 'body-parser'
     // Creates and configures an ExpressJS web server.
     class App {
       // ref to Express instance
@@ -8,6 +10,16 @@ import * as express from 'express';
         this.express = express();
         this.middleware();
         this.routes();
+       // this.express.use(bodyParser.urlencoded({extended: true}));
+      //  this.express.use(bodyParser.json());
+        this.express.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "hello, Content-Type, Origin, Accept, x-access-token, X-XSRF-TOKEN");
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header("Content-Type", "application/json");
+    next(); 
+});
       }
       // Configure Express middleware.
       private middleware(): void {
@@ -25,6 +37,10 @@ import * as express from 'express';
             message: 'Hello World!'
           });
         });
+        router.get("/dhadiIndices", (req, res) =>{
+          let dObj:DhadiIndices = new DhadiIndices();
+          res.send({"dhadiIndices": dObj.dhadiIndices})
+      })
         this.express.use('/', router);
       }
     }

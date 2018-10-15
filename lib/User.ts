@@ -1,5 +1,5 @@
 import { User, DhadiIndices } from "./dhadi";
-import { DhadiService, } from "./dye"
+import { DhadiService } from "./dye"
 
 export class UserService{
   activeUsers : number[] = [1,2]
@@ -14,6 +14,11 @@ export class UserService{
     let u = this.activeUsers;
       this.activeUsers = [u[0]-(u[0]-u[1]), u[1]-(u[1]-u[0])];
       this.currentUser = this.activeUsers[0];
+    //  console.log("  console.log(this.users)", this.users)
+     this.activeUsers.forEach((user) =>{
+  //   console.log(user, "user")
+       this._users[user-1].isActive = !this._users[user-1].isActive;
+     })
   }
   
   set userPosition(position: number){
@@ -32,6 +37,7 @@ export class UserService{
   get userFinalPosition(): number[]{
     return this.currentUserObj.finalPosition;
   }
+
   get users(){
     return this._users;
   }

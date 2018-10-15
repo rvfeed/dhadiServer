@@ -19,7 +19,7 @@ export class DhadiIndices{
         "7": [3,6,8],
         "6" : [3,5,7],
         "5": [3,4,6],
-        "4": [2,3,4],
+        "4": [2,3,5],
         "3": [1, 2, 4, 5, 6, 7, 8, 9],
         "2": [1,3,4],
         "1": [2,3,9]
@@ -38,6 +38,16 @@ export class DhadiIndices{
         ]
     
    } 
+   winCombination(userFinalPosition){
+    for(let arr of this.winIndices){
+        console.log(arr,userFinalPosition,
+         (arr.sort().toString() == userFinalPosition.sort().toString()))
+        if(arr.sort().toString() == userFinalPosition.sort().toString()){
+           return true;  
+        }
+      }
+    return false;
+}
 }
 class Dye extends DhadiIndices{
     readonly maxDyeCount = 3;
@@ -50,6 +60,7 @@ class Dye extends DhadiIndices{
 export class User extends Dye implements IUser {
     name: string;    
     isActive: boolean = false;
+    winner: boolean = false;
     private  _position: number = 0;
     private _finalPosition: Array<number> = []
     color: string = "#ff0000";
@@ -62,6 +73,12 @@ export class User extends Dye implements IUser {
     get finalPosition(){
         return this._finalPosition.slice(0).sort();
     }
+    changeFinalPosition(prevDye, curDye){
+        if(this._finalPosition.indexOf(prevDye) > 0){
+            this._finalPosition.splice(this._finalPosition.indexOf(prevDye), 1, curDye)
+        }
+       
+      }
     private setfinalPosition(){
        // this._finalPosition = finalArray;
        console.log(this._position)
