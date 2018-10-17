@@ -1,5 +1,5 @@
 import * as http from 'http';
-import App from './App';
+import App from './app';
 //create a server and pass our Express app to it.
 const server = http.createServer(App);
 var io = require('socket.io')(server);
