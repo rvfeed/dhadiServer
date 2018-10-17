@@ -2,7 +2,7 @@
   "name": "dhadiserver",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "gulp",
     "start": "nodemon dist/main.js"
