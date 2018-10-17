@@ -36,7 +36,6 @@ export class DhadiIndices{
         [1,4,7],
         [3,6,9]
         ]
-    
    } 
    winCombination(userFinalPosition){
     for(let arr of this.winIndices){

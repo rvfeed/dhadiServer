@@ -13,7 +13,7 @@ import {bodyParser} from 'body-parser'
        // this.express.use(bodyParser.urlencoded({extended: true}));
       //  this.express.use(bodyParser.json());
         this.express.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "hello, Content-Type, Origin, Accept, x-access-token, X-XSRF-TOKEN");
     res.header('Access-Control-Allow-Credentials', true);

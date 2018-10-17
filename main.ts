@@ -85,6 +85,6 @@ io.on('connection', (socket) => {
     }
    
 });
-server.listen(3001, ()=>{
-    console.log("Server has started at 3001")
+server.listen(3000, ()=>{
+    console.log("Server has started at 3000")
 });
