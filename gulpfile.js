@@ -15,4 +15,4 @@ const gulp = require('gulp');
       gulp.watch('**/*.ts', ['scripts']);
     });
 
-    gulp.task('default', ['watch']);
+    gulp.task('default', ['scripts']);

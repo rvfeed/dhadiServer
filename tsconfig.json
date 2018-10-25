@@ -1,13 +1,27 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "outDir": "dist",
-      "module": "commonjs"
-    },
-    "include": [
-      "**/*.ts"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es6",
+    "module": "commonjs",
+    "typeRoots": [
+      "node_modules/@types"
     ],
-    "exclude": [
-      "node_modules"
+    "lib": [
+      "es2017",
+      "dom"
     ]
-  }
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "src"
+  ]
+}

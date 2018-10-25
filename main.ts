@@ -85,6 +85,6 @@ io.on('connection', (socket) => {
     }
    
 });
-server.listen(3000, ()=>{
-    console.log("Server has started at 3000")
+server.listen(process.env.PORT || 8080, ()=>{
+    console.log("Server has started at 8080")
 });
